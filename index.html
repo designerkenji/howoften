@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Often — Personal Pattern Recognition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --amber:    #F59E0B;
+      --amber-lt: #fef3c7;
+      --amber-dk: #d97706;
+      --charcoal: #1c1917;
+      --warm:     #44403c;
+      --stone:    #f5f5f4;
+      --white:    #ffffff;
+      --border:   #e7e5e4;
+      --radius:   14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--charcoal); text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--amber-dk); font-style: italic; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+      padding: 140px 80px 80px;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: 200px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--amber-lt); border: 1px solid rgba(245,158,11,0.35);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.78rem; font-weight: 500; color: var(--amber-dk);
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--amber); display: block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+    h1 em { color: var(--amber-dk); font-style: italic; }
+
+    .hero-sub {
+      font-size: 1.1rem; font-weight: 300; line-height: 1.75;
+      color: var(--warm); max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .btn-soon {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--charcoal); color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      opacity: 0.5; cursor: not-allowed;
+      box-shadow: 0 8px 28px rgba(28,25,23,0.15);
+    }
+    .btn-soon svg { width: 18px; height: 18px; }
+
+    /* ── PHONE MOCKUP ── */
+    .hero-visual {
+      display: flex; justify-content: center; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .phone {
+      width: 260px; height: 530px;
+      background: var(--charcoal);
+      border-radius: 44px;
+      border: 8px solid #2c2825;
+      box-shadow: 0 40px 100px rgba(28,25,23,0.25), 0 0 0 1px rgba(255,255,255,0.05);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+    .phone-notch {
+      width: 90px; height: 26px;
+      background: var(--charcoal);
+      border-radius: 0 0 18px 18px;
+      margin: 0 auto 8px;
+    }
+    .phone-screen {
+      flex: 1;
+      background: #211e1b;
+      padding: 4px 14px 14px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .phone-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .phone-app-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem; font-weight: 400;
+      color: var(--white);
+    }
+    .phone-app-title span { color: var(--amber); font-style: italic; }
+    .phone-date {
+      font-size: 0.58rem; color: rgba(255,255,255,0.3);
+    }
+
+    .tracker-row {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .tracker-top {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .tracker-name {
+      font-size: 0.7rem; font-weight: 600; color: var(--white);
+    }
+    .tracker-count {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.95rem; color: var(--amber);
+    }
+    .tracker-bar-bg {
+      height: 3px; background: rgba(255,255,255,0.08);
+      border-radius: 2px; overflow: hidden;
+    }
+    .tracker-bar-fill {
+      height: 100%; background: var(--amber);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+    .tracker-meta {
+      font-size: 0.56rem; color: rgba(255,255,255,0.35);
+    }
+
+    .insight-card {
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .insight-label {
+      font-size: 0.55rem; font-weight: 600;
+      color: var(--amber); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .insight-text {
+      font-size: 0.62rem; color: rgba(255,255,255,0.65); line-height: 1.5;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 100px 80px;
+      background: var(--stone);
+    }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber-dk);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400; letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 56px;
+      max-width: 560px;
+      line-height: 1.2;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .feat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(245,158,11,0.1);
+    }
+    .feat-icon {
+      width: 52px; height: 52px;
+      background: var(--amber-lt);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+    .feat-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; font-weight: 400;
+      color: var(--charcoal); margin-bottom: 10px;
+    }
+    .feat-card p {
+      font-size: 0.9rem; line-height: 1.7;
+      color: var(--warm);
+    }
+
+    /* ── USE CASES ── */
+    .use-cases {
+      padding: 100px 80px;
+      background: var(--charcoal);
+    }
+    .use-cases .section-label { color: var(--amber); }
+    .use-cases .section-title { color: var(--white); }
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .case-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      transition: background .2s, border-color .2s;
+    }
+    .case-card:hover {
+      background: rgba(245,158,11,0.07);
+      border-color: rgba(245,158,11,0.2);
+    }
+    .case-event {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 10px;
+    }
+    .case-question {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem; font-weight: 400;
+      color: var(--white); line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    .case-desc {
+      font-size: 0.85rem; line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      padding: 52px 80px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; font-weight: 400;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--amber); font-style: italic; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.4);
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--amber); }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .hero { grid-template-columns: 1fr; padding: 120px 28px 60px; gap: 48px; }
+      .hero-visual { order: -1; }
+      .features { padding: 70px 28px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .use-cases { padding: 70px 28px; }
+      .cases-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 24px; padding: 40px 28px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#top">How <span>Often</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-text">
+      <div class="hero-badge">Coming Soon to the App Store</div>
+      <h1>Your life has<br><em>patterns.</em><br>Find them.</h1>
+      <p class="hero-sub">
+        How Often tracks how frequently events happen in your life — then surfaces the insights hidden in your data. Not just counts. Answers.
+      </p>
+      <a class="btn-soon" onclick="return false;">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Coming Soon on the App Store
+      </a>
+    </div>
+
+    <!-- Phone Mockup -->
+    <div class="hero-visual">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <span class="phone-app-title">How <span>Often</span></span>
+            <span class="phone-date">Apr 12, 2026</span>
+          </div>
+
+          <div class="tracker-row">
+            <div class="tracker-top">
+              <span class="tracker-name">🤧 Coughing</span>
+              <span class="tracker-count">14×</span>
+            </div>
+            <div class="tracker-bar-bg"><div class="tracker-bar-fill" style="width:70%"></div></div>
+            <span class="tracker-meta">↑ 40% vs last week · peaks Tue–Thu</span>
+          </div>
+
+          <div class="tracker-row">
+            <div class="tracker-top">
+              <span class="tracker-name">😴 Poor sleep</span>
+              <span class="tracker-count">6×</span>
+            </div>
+            <div class="tracker-bar-bg"><div class="tracker-bar-fill" style="width:42%"></div></div>
+            <span class="tracker-meta">↓ 20% vs last month</span>
+          </div>
+
+          <div class="tracker-row">
+            <div class="tracker-top">
+              <span class="tracker-name">☕ Skipped coffee</span>
+              <span class="tracker-count">3×</span>
+            </div>
+            <div class="tracker-bar-bg"><div class="tracker-bar-fill" style="width:22%"></div></div>
+            <span class="tracker-meta">Correlates with headache events</span>
+          </div>
+
+          <div class="insight-card">
+            <div class="insight-label">✦ Pattern found</div>
+            <div class="insight-text">Coughing episodes are 3× more frequent on days after poor sleep. 28-day trend.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-label">How It Works</div>
+    <div class="section-title">Log once. Understand everything.</div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">⚡</div>
+        <h3>One-Tap Logging</h3>
+        <p>Record any event in under a second. No forms, no friction. The faster you can log, the more complete your data becomes.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📈</div>
+        <h3>Pattern Recognition</h3>
+        <p>How Often automatically surfaces trends — time-of-day clusters, day-of-week spikes, correlations between different events you track.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💡</div>
+        <h3>Meaningful Insights</h3>
+        <p>Not just charts. Plain-language observations that answer the real question: is this getting better, worse, or staying the same?</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔒</div>
+        <h3>Private by Design</h3>
+        <p>Your data stays on your device. Health and personal patterns are sensitive — we built How Often with that in mind from day one.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📋</div>
+        <h3>Doctor-Ready Reports</h3>
+        <p>When you need to share, export a clean timeline. Arrive at appointments with actual data instead of "I think it's been more frequent lately."</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🗓️</div>
+        <h3>Time-Based Context</h3>
+        <p>Compare this week vs. last month. See how frequency changes after you start or stop something. Time is the lens that makes data meaningful.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="use-cases" id="use-cases">
+    <div class="section-label">Real-World Uses</div>
+    <div class="section-title">What are you trying to understand?</div>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-event">Health</div>
+        <div class="case-question">"Is my coughing actually getting worse?"</div>
+        <div class="case-desc">Track symptoms over weeks, not just gut feelings. Spot whether episodes cluster after certain foods, weather, or activities.</div>
+      </div>
+      <div class="case-card">
+        <div class="case-event">Habits</div>
+        <div class="case-question">"How often am I actually exercising?"</div>
+        <div class="case-desc">The truth about your habits, with no judgment. See streaks, gaps, and whether your frequency is trending the direction you want.</div>
+      </div>
+      <div class="case-card">
+        <div class="case-event">Parenting</div>
+        <div class="case-question">"Is my child's tantrum frequency changing?"</div>
+        <div class="case-desc">Log incidents and let patterns emerge. Identify triggers by time of day, activities, or routines you've recently changed.</div>
+      </div>
+      <div class="case-card">
+        <div class="case-event">Well-being</div>
+        <div class="case-question">"What's causing my anxiety spikes?"</div>
+        <div class="case-desc">Track mood events alongside daily variables. Over time, correlations surface that you'd never notice in the moment.</div>
+      </div>
+      <div class="case-card">
+        <div class="case-event">Pets</div>
+        <div class="case-question">"Are these episodes more frequent this month?"</div>
+        <div class="case-desc">Pets can't tell you if something's getting worse. Your log can. Arrive at vet appointments with a precise frequency history.</div>
+      </div>
+      <div class="case-card">
+        <div class="case-event">Anything</div>
+        <div class="case-question">"How often does this actually happen?"</div>
+        <div class="case-desc">Memory is a terrible frequency counter. How Often isn't. If you've ever wondered "is this more often than before?" — this is your app.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">How <span>Often</span></div>
+    <ul class="footer-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="privacy_policy.html">Privacy Policy</a></li>
+      <li><a href="terms_of_service.html">Terms of Service</a></li>
+      <li><a href="mailto:support@howoften.app">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 How Often. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

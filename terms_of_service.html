@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Often — Terms of Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --amber:    #F59E0B;
+      --amber-lt: #fef3c7;
+      --amber-dk: #d97706;
+      --charcoal: #1c1917;
+      --warm:     #44403c;
+      --stone:    #f5f5f4;
+      --white:    #ffffff;
+      --border:   #e7e5e4;
+      --radius:   14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--charcoal); text-decoration: none;
+    }
+    .nav-logo span { color: var(--amber-dk); font-style: italic; }
+
+    /* ── PAGE BANNER ── */
+    .page-banner {
+      padding: 120px 80px 60px;
+      background: var(--charcoal);
+      position: relative; overflow: hidden;
+    }
+    .page-banner::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-banner .breadcrumb {
+      font-size: 0.8rem; color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .page-banner .breadcrumb a { color: var(--amber); text-decoration: none; }
+    .page-banner .breadcrumb a:hover { text-decoration: underline; }
+    .page-banner h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 400; letter-spacing: -0.02em;
+      color: var(--white); line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .page-banner h1 em { color: var(--amber); font-style: italic; }
+    .page-banner p { font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 520px; line-height: 1.6; }
+
+    /* ── LAYOUT ── */
+    .tos-wrap {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 80px 100px;
+    }
+
+    /* ── SIDEBAR ── */
+    .tos-sidebar { position: sticky; top: 90px; height: fit-content; }
+    .tos-sidebar nav {
+      position: static; display: block;
+      padding: 0; background: none; border: none; backdrop-filter: none;
+    }
+    .tos-sidebar nav ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .tos-sidebar nav ul a {
+      font-size: 0.85rem; color: var(--warm); text-decoration: none;
+      padding: 7px 10px; border-radius: 6px; display: block;
+      transition: background .15s, color .15s;
+    }
+    .tos-sidebar nav ul a:hover { background: var(--amber-lt); color: var(--amber-dk); }
+    .sidebar-divider { height: 1px; background: var(--border); margin: 8px 10px; }
+    .toc-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber-dk);
+      padding: 10px 10px 4px; display: block;
+      pointer-events: none; cursor: default;
+    }
+
+    /* ── CONTENT ── */
+    .tos-content { max-width: 700px; }
+    .tos-meta { font-size: 0.82rem; color: var(--warm); margin-bottom: 32px; }
+    .tos-meta strong { color: var(--charcoal); }
+    .tos-intro {
+      background: var(--amber-lt);
+      border-left: 4px solid var(--amber);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      font-size: 0.92rem; line-height: 1.65; color: var(--warm);
+      margin-bottom: 48px;
+    }
+    .tos-section { margin-bottom: 44px; scroll-margin-top: 90px; }
+    .tos-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem; font-weight: 400;
+      color: var(--charcoal);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .tos-section p { font-size: 0.93rem; line-height: 1.75; color: var(--warm); margin-bottom: 14px; }
+    .tos-section p:last-child { margin-bottom: 0; }
+    .tos-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 10px 0 14px; }
+    .tos-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 0.93rem; line-height: 1.65; color: var(--warm);
+    }
+    .tos-list li::before { content: '→'; color: var(--amber-dk); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .highlight-box {
+      background: #fef9ec; border: 1px solid #f0d87a;
+      border-radius: 10px; padding: 16px 20px;
+      font-size: 0.88rem; line-height: 1.65; color: #6b5700; margin: 14px 0;
+    }
+    .contact-box {
+      background: var(--charcoal); border-radius: var(--radius);
+      padding: 28px 32px; margin-top: 16px;
+    }
+    .contact-box p { color: rgba(255,255,255,0.6) !important; }
+    .contact-box a { color: var(--amber); text-decoration: none; font-weight: 500; }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111; padding: 52px 80px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--white); }
+    .footer-logo span { color: var(--amber); font-style: italic; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--amber); }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .page-banner { padding: 100px 28px 48px; }
+      .tos-wrap { grid-template-columns: 1fr; gap: 40px; padding: 40px 28px 80px; }
+      .tos-sidebar { position: static; }
+      footer { flex-direction: column; gap: 24px; padding: 40px 28px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">How <span>Often</span></a>
+  </nav>
+
+  <div class="page-banner">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Terms of Service</div>
+    <h1>Terms of <em>Service</em></h1>
+    <p>Please read these terms carefully before using How Often. By using the app, you agree to be bound by them.</p>
+  </div>
+
+  <div class="tos-wrap">
+    <aside class="tos-sidebar">
+      <nav>
+        <ul>
+          <li><a href="index.html">↑ Home</a></li>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="privacy_policy.html">Privacy Policy</a></li>
+          <li class="sidebar-divider"></li>
+          <li><span class="toc-label">Terms of Service</span></li>
+          <li><a href="#tos-acceptance">1. Acceptance</a></li>
+          <li><a href="#tos-eligibility">2. Eligibility</a></li>
+          <li><a href="#tos-account">3. Accounts</a></li>
+          <li><a href="#tos-use">4. Acceptable Use</a></li>
+          <li><a href="#tos-content">5. Your Data</a></li>
+          <li><a href="#tos-ip">6. Intellectual Property</a></li>
+          <li><a href="#tos-privacy">7. Privacy</a></li>
+          <li><a href="#tos-disclaimer">8. Disclaimers</a></li>
+          <li><a href="#tos-liability">9. Limitation of Liability</a></li>
+          <li><a href="#tos-termination">10. Termination</a></li>
+          <li><a href="#tos-changes">11. Changes to Terms</a></li>
+          <li><a href="#tos-law">12. Governing Law</a></li>
+          <li><a href="#tos-contact">13. Contact Us</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="tos-content">
+      <p class="tos-meta">
+        <strong>Last Updated:</strong> April 3, 2026 &nbsp;&middot;&nbsp;
+        <strong>App:</strong> How Often
+      </p>
+      <div class="tos-intro">
+        These Terms of Service ("Terms") govern your use of the How Often mobile application and any related services. By downloading, installing, or using How Often, you agree to these Terms. If you do not agree, please do not use the app.
+      </div>
+
+      <div class="tos-section" id="tos-acceptance">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using How Often ("the App"), you confirm that you have read, understood, and agree to be bound by these Terms of Service and our <a href="privacy_policy.html" style="color:var(--amber-dk);font-weight:500;">Privacy Policy</a>, which is incorporated herein by reference.</p>
+        <p>If you are using How Often on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+      </div>
+
+      <div class="tos-section" id="tos-eligibility">
+        <h2>2. Eligibility</h2>
+        <p>You must be at least 13 years of age to use How Often. By using the App, you represent and warrant that you meet this age requirement. If you are under 18, you confirm that you have obtained consent from a parent or legal guardian.</p>
+        <p>How Often is currently available in jurisdictions where it is permitted by applicable law. We make no representation that the App is appropriate or available in all locations.</p>
+      </div>
+
+      <div class="tos-section" id="tos-account">
+        <h2>3. Accounts</h2>
+        <p>Some features of How Often — such as cloud backup and cross-device sync — require you to create an account. When creating an account, you agree to:</p>
+        <ul class="tos-list">
+          <li>Provide accurate, current, and complete information.</li>
+          <li>Keep your login credentials confidential and not share them with others.</li>
+          <li>Notify us immediately if you suspect unauthorized access to your account.</li>
+          <li>Take responsibility for all activity that occurs under your account.</li>
+        </ul>
+        <p>How Often can be used without an account. Local tracking data does not require registration.</p>
+      </div>
+
+      <div class="tos-section" id="tos-use">
+        <h2>4. Acceptable Use</h2>
+        <p>You agree to use How Often only for lawful purposes. You must not:</p>
+        <ul class="tos-list">
+          <li>Use the App to track or surveil another person without their knowledge and consent.</li>
+          <li>Attempt to reverse-engineer, decompile, or tamper with any part of the App.</li>
+          <li>Use automated scripts, bots, or scrapers to interact with the App or its servers.</li>
+          <li>Interfere with or disrupt the integrity or performance of the App or its infrastructure.</li>
+          <li>Use the App in any way that violates applicable local, national, or international law.</li>
+        </ul>
+        <div class="highlight-box">
+          ⚠️ How Often is a personal tracking tool. It must not be used to monitor or collect data about other individuals without their explicit, informed consent.
+        </div>
+      </div>
+
+      <div class="tos-section" id="tos-content">
+        <h2>5. Your Data</h2>
+        <p>All event logs, patterns, and tracking data you create in How Often belong to you. We do not claim ownership of your data.</p>
+        <p>By optionally enabling cloud backup, you grant How Often a limited, non-exclusive license to store and sync your data solely for the purpose of delivering the backup service to you. This license terminates when you delete your data or your account.</p>
+        <p>You can export or delete your data at any time from within the app. We will not retain your tracking data after deletion.</p>
+      </div>
+
+      <div class="tos-section" id="tos-ip">
+        <h2>6. Intellectual Property</h2>
+        <p>All content, design, software, and materials that make up How Often — excluding your personal tracking data — are owned by or licensed to us and protected by applicable intellectual property laws.</p>
+        <p>You may not copy, reproduce, modify, distribute, or create derivative works from any part of How Often without our express written permission. The How Often name, logo, and brand elements are our trademarks and may not be used without authorization.</p>
+      </div>
+
+      <div class="tos-section" id="tos-privacy">
+        <h2>7. Privacy</h2>
+        <p>Your use of How Often is governed by our <a href="privacy_policy.html" style="color:var(--amber-dk);font-weight:500;">Privacy Policy</a>, which describes how we handle your data. How Often is designed with a local-first, privacy-first approach — your tracking data stays on your device unless you choose to enable cloud backup.</p>
+      </div>
+
+      <div class="tos-section" id="tos-disclaimer">
+        <h2>8. Disclaimers</h2>
+        <p>How Often is provided on an "as is" and "as available" basis, without warranties of any kind. We do not warrant that:</p>
+        <ul class="tos-list">
+          <li>The App will be uninterrupted, error-free, or free from data loss.</li>
+          <li>Patterns or insights surfaced by the App are medically accurate or constitute professional advice.</li>
+          <li>The App is a substitute for medical, psychological, or professional consultation.</li>
+        </ul>
+        <div class="highlight-box">
+          ⚕️ How Often is not a medical device or diagnostic tool. Insights generated by the app are for personal awareness only. Always consult a qualified professional for medical concerns.
+        </div>
+      </div>
+
+      <div class="tos-section" id="tos-liability">
+        <h2>9. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by applicable law, How Often and its officers, employees, and affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of — or inability to use — the App, even if we have been advised of the possibility of such damages.</p>
+        <p>Our total liability to you for any claim arising out of or relating to these Terms or the App shall not exceed the amount you paid us (if any) in the twelve months preceding the claim.</p>
+      </div>
+
+      <div class="tos-section" id="tos-termination">
+        <h2>10. Termination</h2>
+        <p>We may suspend or terminate your access to How Often at any time, with or without notice, if we believe you have violated these Terms or if we decide to discontinue the App or any part of it.</p>
+        <p>You may stop using the App at any time. To delete your account and all associated cloud data, contact us at the address in Section 13. Local data can be deleted directly from your device.</p>
+        <p>Sections relating to intellectual property, disclaimers, limitation of liability, and governing law survive any termination.</p>
+      </div>
+
+      <div class="tos-section" id="tos-changes">
+        <h2>11. Changes to Terms</h2>
+        <p>We may update these Terms from time to time. When we make material changes, we will update the "Last Updated" date above and notify you through an in-app notice where appropriate.</p>
+        <p>Your continued use of How Often after any update constitutes your acceptance of the revised Terms. If you do not agree, you should stop using the App.</p>
+      </div>
+
+      <div class="tos-section" id="tos-law">
+        <h2>12. Governing Law</h2>
+        <p>These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in Delaware.</p>
+      </div>
+
+      <div class="tos-section" id="tos-contact">
+        <h2>13. Contact Us</h2>
+        <p>Questions or concerns about these Terms of Service? Please reach out:</p>
+        <div class="contact-box">
+          <p><strong style="color:#fff;">How Often — Legal Inquiries</strong></p>
+          <p>Email: <a href="mailto:support@howoften.app">support@howoften.app</a></p>
+          <p style="margin-top:8px;font-size:0.82rem;">We aim to respond within 7 business days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">How <span>Often</span></div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy_policy.html">Privacy Policy</a></li>
+      <li><a href="terms_of_service.html">Terms of Service</a></li>
+      <li><a href="mailto:support@howoften.app">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 How Often. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
